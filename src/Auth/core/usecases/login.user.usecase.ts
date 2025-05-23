@@ -40,6 +40,7 @@ export class LoginUserUsecase implements LoginUserInputPort {
       sub: user.id,
       username: user.userName,
       email: user.email,
+      role: user.role,
     };
 
     try {

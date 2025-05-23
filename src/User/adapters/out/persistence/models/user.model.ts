@@ -1,5 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { UserRole } from 'src/common/enums/user.roles';
 
 @Schema()
 export class User {
@@ -23,6 +24,9 @@ export class User {
 
   @Prop({ required: true })
   gender: string;
+
+  @Prop({ required: true })
+  role: UserRole;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

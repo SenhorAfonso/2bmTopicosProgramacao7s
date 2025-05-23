@@ -1,3 +1,4 @@
+import { UserRole } from 'src/common/enums/user.roles';
 import { Gender } from 'src/User/adapters/in/enums/Gender';
 
 export class UserModelIn {
@@ -10,5 +11,6 @@ export class UserModelIn {
     public readonly confirmPassword: string,
     public readonly dayOfBirth: Date,
     public readonly gender: Gender,
+    public readonly role: UserRole,
   ) {}
 }

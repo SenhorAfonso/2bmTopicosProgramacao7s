@@ -39,6 +39,8 @@ export class SaveUserUsecase implements SaveUserInputPort {
     }
 
     if (usernameExist) {
+      console.log(usernameExist);
+      console.log(newUser);
       throw new BadRequestException(
         ExceptionMessage.AUTH.SIGNUP.USERNAME_TAKEN,
       );
@@ -53,6 +55,7 @@ export class SaveUserUsecase implements SaveUserInputPort {
       throw new InternalServerErrorException(ExceptionMessage.BCRYPT.PASS_HASH);
     }
 
+    console.log(newUser);
     const userDocument = await this.userPersistenceAdapter.saveUser(newUser);
     return this.userMapper.UserDocumentToUserModelOut(userDocument);
   }

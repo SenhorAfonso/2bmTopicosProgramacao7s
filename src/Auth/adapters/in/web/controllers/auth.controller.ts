@@ -23,9 +23,12 @@ import { ChangePasswordRequest } from './dto/request/change.password.request';
 import { ChangePasswordInputPort } from 'src/Auth/core/ports/in/change.password.input.port';
 import { IsPublic } from 'src/common/decorators/is.public';
 import { AuthGuard } from 'src/common/guards/auth.guard';
+import { Roles } from 'src/common/decorators/role';
+import { UserRole } from 'src/common/enums/user.roles';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @Controller('auth')
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard, RolesGuard)
 export class AuthController {
   constructor(
     @Inject('SignUpUserInputPort')
@@ -49,10 +52,9 @@ export class AuthController {
     return this.loginUsecase.execute(userModelIn);
   }
 
-  @IsPublic()
   @Post('/signup')
-  @HttpCode(201)
   @ResponseMessage('Signup successfully', HttpStatus.CREATED)
+  @Roles(UserRole.Admin)
   async SignUp(@Body() signUpRequest: SignUpUserRequest) {
     const userModelIn = this.userMapper.UserRequestToUserModelIn(signUpRequest);
     return this.signUpUsecase.execute(userModelIn);

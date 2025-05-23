@@ -11,16 +11,13 @@ import { Gender } from '../../enums/Gender';
 import { ExceptionMessage } from 'src/User/core/domain/exceptions/exception.message';
 import { ChangePasswordRequest } from 'src/Auth/adapters/in/web/controllers/dto/request/change.password.request';
 import { ChangePasswordModelIn } from 'src/User/core/domain/models/change.password.model.in';
+import { UserRole } from 'src/common/enums/user.roles';
 
 @Injectable()
 export class UserMapper {
   UserRequestToLoginUserModelIn(request: LoginUserRequest): LoginUserModelIn {
     try {
-      return new LoginUserModelIn(
-        request.userName,
-        request.email,
-        request.password,
-      );
+      return new LoginUserModelIn(request.email, request.password);
     } catch {
       throw new InternalServerErrorException(
         ExceptionMessage.USERS.MAPPER.LOGIN_REQUEST_TO_LOGIN_MODEL,
@@ -39,6 +36,7 @@ export class UserMapper {
         request.confirmPassword,
         request.dayOfBirth,
         request.gender,
+        request.role || UserRole.User,
       );
     } catch {
       throw new InternalServerErrorException(
@@ -73,6 +71,7 @@ export class UserMapper {
         document.email,
         document.dayOfBirth,
         document.gender as unknown as Gender,
+        document.role,
       );
     } catch {
       throw new InternalServerErrorException(
@@ -95,6 +94,7 @@ export class UserMapper {
               document.email,
               document.dayOfBirth,
               document.gender as unknown as Gender,
+              document.role,
             ),
           );
         });

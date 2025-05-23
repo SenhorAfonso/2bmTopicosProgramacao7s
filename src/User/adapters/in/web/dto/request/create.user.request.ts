@@ -7,6 +7,7 @@ import {
   Matches,
   MinLength,
 } from 'class-validator';
+import { UserRole } from 'src/common/enums/user.roles';
 import { parseDate } from 'src/common/parse.date';
 import { Gender } from 'src/User/adapters/in/enums/Gender';
 
@@ -69,4 +70,7 @@ export class CreateUserRequest {
   @IsEnum(Gender)
   @Transform(({ value }) => value.toUpperCase(), { toClassOnly: true })
   gender: Gender;
+
+  @IsEnum(UserRole)
+  role: UserRole;
 }

@@ -12,6 +12,7 @@ export const ExceptionMessage = {
     ALREADY_EXISTS: 'User already exists!',
     EMAIL_NOT_FOUND: 'There is no user with such email!',
     USERNAME_NOT_FOUND: 'There is no user with such username!',
+    NOT_OWNER: 'You do not have authorization to access this object!',
     MAPPER: {
       LOGIN_REQUEST_TO_LOGIN_MODEL:
         'Error mapping login request to login model!',

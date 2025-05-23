@@ -13,11 +13,13 @@ import { UpdateUserByIdUsecase } from './core/usecases/update.user.by.id.usecase
 import { UserPersistenceAdapter } from './adapters/out/persistence/user.persistence.adapter';
 import { UserMapper } from './adapters/in/web/dto/user.mapper';
 import { GetUserByUsecase } from './core/usecases/get.user.by.usecase';
+import { CreateAdminUserUsecase } from './core/usecases/create.admin.user.usecase';
 
 @Module({
   controllers: [UserController],
   providers: [
     UserMapper,
+    CreateAdminUserUsecase,
     {
       provide: 'UserPersistenceOutputPort',
       useClass: UserPersistenceAdapter,

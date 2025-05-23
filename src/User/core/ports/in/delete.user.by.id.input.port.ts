@@ -1,3 +1,5 @@
+import { UserRole } from 'src/common/enums/user.roles';
+
 export interface DeleteUserByIdInputPort {
-  execute(userId: string): Promise<void>;
+  execute(userId: string, owner: string, role: UserRole): Promise<void>;
 }

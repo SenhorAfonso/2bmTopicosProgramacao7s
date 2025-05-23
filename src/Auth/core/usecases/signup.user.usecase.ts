@@ -18,11 +18,13 @@ export class SignUpUserUsecase implements SignUpUserInputPort {
 
   async execute(signUpUser: UserModelIn): Promise<{ access_token: string }> {
     const newUser = await this.saveUser.execute(signUpUser);
+    console.log(newUser);
 
     const payload = {
       sub: newUser.id,
       username: newUser.userName,
       email: newUser.email,
+      role: newUser.role,
     };
 
     let access_token: string;

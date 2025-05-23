@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { parseDate } from 'src/common/parse.date';
+import { UserRole } from 'src/common/enums/user.roles';
 
 export class SignUpUserRequest {
   @IsString({ message: 'First name must be a string' })
@@ -67,4 +68,7 @@ export class SignUpUserRequest {
   @IsEnum(Gender)
   @Transform(({ value }) => value.toUpperCase(), { toClassOnly: true })
   gender: Gender;
+
+  @IsEnum(UserRole)
+  role: UserRole;
 }
