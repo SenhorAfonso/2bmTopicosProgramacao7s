@@ -36,7 +36,7 @@ export class UserController {
     @Inject('SaveUserInputPort')
     private readonly saveNewUser: SaveUserInputPort,
     @Inject('GetUserByInputPort')
-    private readonly getUserBy: GetUserByIdInputPort,
+    private readonly getUserById: GetUserByIdInputPort,
     @Inject('GetAllUsersInputPort')
     private readonly getAllUsers: GetAllUsersInputPort,
     @Inject('DeleteUserByIdInputPort')
@@ -64,8 +64,12 @@ export class UserController {
   @Get('/:field')
   @Roles(UserRole.Admin)
   @ResponseMessage('Single user retrieved!')
-  async getUser(@Param('field') field: string) {
-    return this.getUserBy.execute(field);
+  async getSingleUser(
+    @Param('field') field: string,
+    @Request() req: { user: { sub: string; role: UserRole } },
+  ) {
+    const { sub, role } = req.user;
+    return this.getUserById.execute(field, sub, role);
   }
 
   @Put('/:id')

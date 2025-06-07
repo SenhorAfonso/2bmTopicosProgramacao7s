@@ -36,7 +36,7 @@ export class UpdateUserByIdUsecase implements UpdateUserByIdInputPort {
       );
     }
 
-    if (role !== UserRole.Admin) {
+    if (role === UserRole.Admin) {
       const user = await this.userPersistenceAdapter.updateUserById(
         userId,
         newInfo,
